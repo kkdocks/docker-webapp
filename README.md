@@ -1,6 +1,8 @@
 # 📦 docker webapp
 
-A Simple web running env.
+A web project deployment and running env.
+
+Modify the server API configuration by replacing the environment variable.
 
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/nekoimi/webapp/latest)](https://hub.docker.com/r/nekoimi/webapp)
 [![Docker Pulls](https://img.shields.io/docker/pulls/nekoimi/webapp)](https://hub.docker.com/r/nekoimi/webapp)
@@ -45,7 +47,7 @@ The browser opens the default access link to [http://127.0.0.1](http://127.0.0.1
 
 ### Using Docker Image
 
-### docker-compose
+### docker compose
 
 ```bash
 version: "3"
@@ -55,15 +57,17 @@ services:
     ports:
       - 80:80
     environment:
-      ENV_DEF: {yuor env1} {your env2} {your env3}
+      ENV_DEF: {env1 name} {env2 name} {env3 name} ... {more}
       {env1 name}: {env1 value}
       {env2 name}: {env2 value}
       {env3 name}: {env3 value}
+      ...
+      {more}
     volumes:
       - path/www:/workspace
 ```
 
-### Rebuild
+### rebuild image
 
 ``` bash
 # Dockerfile
