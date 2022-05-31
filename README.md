@@ -11,7 +11,7 @@ Modify the server API configuration by replacing the environment variable.
 
 - 📥 [Download](#-download)
 
-- 🛠️ [Usage](#-usage)
+- 🛠️ [Usage](#%EF%B8%8F-usage)
 
 - 📄 [License](#-license)
 
