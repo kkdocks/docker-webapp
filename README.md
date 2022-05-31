@@ -57,6 +57,8 @@ services:
     ports:
       - 80:80
     environment:
+      # Configure ENV_DEF environment variable defines the list of environment variables to be replaced. 
+      # If there are multiple environment variables to be replaced, please separate them with spaces.
       ENV_DEF: {env1 name} {env2 name} {env3 name} ... {more}
       {env1 name}: {env1 value}
       {env2 name}: {env2 value}
