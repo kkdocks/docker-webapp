@@ -33,13 +33,19 @@ docker pull nekoimi/webapp:latest
 
 Example [repo](https://github.com/kkdocks/docker-webapp.git)
 
+step1:
+
 ```bash
 git clone https://github.com/kkdocks/docker-webapp.git
 ```
 
+step2:
+
 ```base
 docker-compose up -d
 ```
+
+step3:
 
 The browser opens the default access link to [http://127.0.0.1](http://127.0.0.1) view the application of environment variables.
 
