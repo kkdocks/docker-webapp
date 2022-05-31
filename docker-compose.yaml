@@ -1,0 +1,14 @@
+version: "3"
+services:
+  webapp:
+    image: nekoimi/webapp:latest
+    ports:
+      - 80:80
+    environment:
+      ENV_DEF: API_SERVER_URL TITLE BACKGROUND_IMAGE
+      API_SERVER_URL: http://www.example.com
+      TITLE: title-name
+      BACKGROUND_IMAGE: image-url
+    volumes:
+      - ./example:/workspace
+      - ./deploy.sh:/docker-entrypoint.d/deploy.sh
