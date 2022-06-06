@@ -31,12 +31,12 @@ docker pull nekoimi/webapp:latest
 
 ### Example setup
 
-Example [repo](https://github.com/kkdocks/docker-webapp.git)
+Example [repo](https://github.com/nekoimi/docker-webapp.git)
 
 step1:
 
 ```bash
-git clone https://github.com/kkdocks/docker-webapp.git
+git clone https://github.com/nekoimi/docker-webapp.git
 ```
 
 step2:
