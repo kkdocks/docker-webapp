@@ -6,7 +6,7 @@ ENV NGX_WORKER_PROCESSES 1
 
 WORKDIR /workspace
 
-COPY nginx.conf     /etc/nginx/nginx.conf
+COPY nginx.conf     /etc/nginx/nginx.conf.tpl
 COPY default.conf   /etc/nginx/conf.d/default.conf
 COPY deploy.sh      /docker-entrypoint.d/deploy.sh
 
