@@ -60,6 +60,12 @@ _main() {
         fi
     done
   fi
+  # 读取 NGX_WORKER_PROCESSES 设置 nginx.conf 中 worker_processes
+  ngxWorkerProcesses=${NGX_WORKER_PROCESSES:-"auto"}
+  if [ -z "$ngxWorkerProcesses" ]; then
+    echo "Config nginx work_processes: $ngxWorkerProcesses"
+    sed -i "s#NGX_WORKER_PROCESSES#$ngxWorkerProcesses#g" /etc/nginx/nginx.conf
+  fi
   echo '>>>>>>>>>>>>>>>>>>>>>>>>>>> Deploy End <<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 }
 

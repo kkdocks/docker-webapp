@@ -2,8 +2,11 @@ FROM nginx:1.22.0-alpine
 
 LABEL maintainer="nekoimi <nekoimime@gmail.com>"
 
+ENV NGX_WORKER_PROCESSES 1
+
 WORKDIR /workspace
 
+COPY nginx.conf     /etc/nginx/nginx.conf
 COPY default.conf   /etc/nginx/conf.d/default.conf
 COPY deploy.sh      /docker-entrypoint.d/deploy.sh
 
