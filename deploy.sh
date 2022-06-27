@@ -3,6 +3,13 @@ readonly envDef=ENV_DEF
 readonly workspacePath=/workspace
 readonly htmlPath=/usr/share/nginx/html
 
+# 读取 NGX_WORKER_PROC 设置 nginx.conf 中 worker_processes
+NGX_WORKER_PROC_CONF=$NGX_WORKER_PROCESSES
+if [ -z $NGX_WORKER_PROCESSES ]; then
+    NGX_WORKER_PROC_CONF=${NGX_WORKER_PROC:-"1"}
+fi
+
+
 strEnvReplace() {
   # 字符串环境变量替换
   envName=$1
@@ -60,13 +67,10 @@ _main() {
         fi
     done
   fi
-  # 读取 NGX_WORKER_PROCESSES 设置 nginx.conf 中 worker_processes
-  ngxWorkerProcesses=${NGX_WORKER_PROCESSES:-"auto"}
-  if [ ! -z "$ngxWorkerProcesses" ]; then
-    cp -f /etc/nginx/nginx.conf.tpl /etc/nginx/nginx.conf
-    sed -i "s#NGX_WORKER_PROCESSES#$ngxWorkerProcesses#g" /etc/nginx/nginx.conf
-    echo "Config nginx work_processes: $ngxWorkerProcesses"
-  fi
+
+  cp -f /etc/nginx/nginx.conf.tpl /etc/nginx/nginx.conf
+  sed -i "s/NGX_WORKER_PROCESSES/$NGX_WORKER_PROC_CONF/g" /etc/nginx/nginx.conf
+  echo "Config nginx work_processes: $NGX_WORKER_PROC_CONF"
   echo '>>>>>>>>>>>>>>>>>>>>>>>>>>> Deploy End <<<<<<<<<<<<<<<<<<<<<<<<<<<<'
 }
 

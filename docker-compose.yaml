@@ -5,6 +5,7 @@ services:
     ports:
       - 80:80
     environment:
+      NGX_WORKER_PROC: 1
       ENV_DEF: API_SERVER_URL TITLE BACKGROUND_IMAGE
       API_SERVER_URL: http://www.example.com
       TITLE: title-name
