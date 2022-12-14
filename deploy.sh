@@ -15,8 +15,53 @@ strEnvReplace() {
   envName=$1
   eval envValue="$"$1
   filename=$2
+
   echo "Replace $envName with $envValue in the $filename"
-  sed -i "s#$envName#$envValue#g" $filename
+  if [ "$envValue" == '/' ]; then
+    # /ENV_VAR_NAME/
+    envVarAllMatch=$(cat $filename | grep -E "/$envName/" | sed s/[[:space:]]//g)
+    if [ ! -z "$envVarAllMatch" ]; then
+      # 执行替换
+      sed -i "s#/$envName/#$envValue#g" $filename
+    else
+      # /ENV_VAR_NAME
+      envVarLiftMatch=$(cat $filename | grep -E "/$envName" | sed s/[[:space:]]//g)
+      if [ ! -z "$envVarLiftMatch" ]; then
+        # 执行替换
+        sed -i "s#/$envName#$envValue#g" $filename
+      else
+        # ENV_VAR_NAME/
+        envVarRightMatch=$(cat $filename | grep -E "$envName/" | sed s/[[:space:]]//g)
+        if [ ! -z "$envVarRightMatch" ]; then
+          # 执行替换
+          sed -i "s#$envName/#$envValue#g" $filename
+        else
+          # ENV_VAR_NAME
+          # 执行替换
+          sed -i "s#$envName#$envValue#g" $filename
+        fi
+      fi
+    fi
+  else
+    # 正则：/ENV_VAR_NAME
+    # 环境变量值：/envValue
+    envVarLiftMatch=$(cat $filename | grep -E "/$envName" | sed s/[[:space:]]//g)
+    envValueLiftMatch=$(echo "$envValue" | grep -E '^/' | sed s/[[:space:]]//g)
+    if [  ! -z "$envVarLiftMatch" ] && [  ! -z "$envValueLiftMatch" ]; then
+      # 去掉字符串开始的/
+      envValue=$(echo "$envValue" | sed '1s#^/##')
+    fi
+    # 正则：ENV_VAR_NAME/
+    # 环境变量值：envValue/
+    envVarRightMatch=$(cat $filename | grep -E "$envName/" | sed s/[[:space:]]//g)
+    envValueRightMatch=$(echo "$envValue" | grep -E '/$' | sed s/[[:space:]]//g)
+    if [  ! -z "$envVarRightMatch" ] && [  ! -z "$envValueRightMatch" ]; then
+      # 去掉字符串末尾的/
+      envValue=$(echo "$envValue" | sed '1s#/$##')
+    fi
+    # 执行替换
+    sed -i "s#$envName#$envValue#g" $filename
+  fi
 }
 
 envReplace() {
