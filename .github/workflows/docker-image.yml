@@ -1,22 +1,7 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ master ]
-    paths-ignore:
-      - README.md
-      - example
-      - .dockerignore
-      - .gitignore
-      - LICENSE
-  pull_request:
-    branches: [ master ]
-    paths-ignore:
-      - README.md
-      - example
-      - .dockerignore
-      - .gitignore
-      - LICENSE
+  workflow_dispatch:
 
 jobs:
 
