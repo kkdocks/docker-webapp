@@ -12,7 +12,7 @@ COPY 99-deploy.sh   /docker-entrypoint.d/99-deploy.sh
 
 RUN set -x; \
     /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ; \
-    chmod +x /docker-entrypoint.d/deploy.sh
+    chmod +x /docker-entrypoint.d/99-deploy.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
